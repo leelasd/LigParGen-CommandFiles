@@ -1,0 +1,38 @@
+#!/bin/csh
+#
+echo  compute charges for cation and optimize with BOSS
+#     starting from a z-matrix cationname -
+#     this is used to refine an initial structure
+#     of a monocation. CM1A charges are unscaled.
+#
+# usage - xZCM1A+ cationname
+#
+# test if the enviroment variable BOSSdir has been defined
+#
+if (!($?BOSSdir)) then
+   echo "BOSSdir has not been defined; please see README"
+   exit (-1)
+endif
+
+if (-e optzmat) rm optzmat
+cp $argv[1].z optzmat
+csh $BOSSdir/scripts/AM1SP2+cmd >& log
+rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/AM1SP2+cmd >& log
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/AM1SP2+cmd >& log
+#echo  output is in out, sum and plt.pdb
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#
+exit

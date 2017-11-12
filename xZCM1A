@@ -1,0 +1,37 @@
+#!/bin/csh
+#
+echo  compute charges and optimize with BOSS
+#     starting from a z-matrix moleculename -
+#     this is used to refine an initial structure
+#
+# usage - xZCM1A moleculename
+#
+# test if the enviroment variable BOSSdir has been defined
+#
+if (!($?BOSSdir)) then
+   echo "BOSSdir has not been defined; please see README"
+   exit (-1)
+endif
+
+if (-e optzmat) rm optzmat
+cp $argv[1].z optzmat
+csh $BOSSdir/scripts/AM1SPcmd >& log
+rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/AM1SPcmd >& log
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/AM1SPcmd >& log
+#echo  output is in out, sum and plt.pdb
+#rm optzmat
+#cp sum optzmat
+#csh $BOSSdir/scripts/OPTcmd >& log 
+#rm optzmat
+#
+exit
