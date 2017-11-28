@@ -1,0 +1,35 @@
+#
+# Command file for the BOSS program.  Execute by entering the following:
+# csh optcmd >& optlog &
+#***********************************************************************
+echo '     QM Single-Point Calculation'
+#***********************************************************************
+nice +19
+set boss = $BOSSdir/BOSS
+set configurations = "000000"
+set lambda = "0.000 0.000 0.000"
+set boxes = $BOSSdir
+#
+setenv INFILE    optin
+setenv UPFILE    optup
+setenv SAVE      svopt
+setenv AVERAGE   optav
+setenv ZMATRIX   optzmat
+setenv SLVZMAT   slvzmat
+if (-e AM1tmp) rm AM1tmp
+cp $BOSSdir/scripts/AM1SP2-par AM1tmp
+cat $BOSSdir/oplsaa.par >> AM1tmp
+setenv PARAMETER AM1tmp
+setenv BANGPAR   $BOSSdir/oplsaa.sb
+setenv WATERBOX  $boxes/watbox
+setenv ORG1BOX   $boxes/org1box
+setenv ORG2BOX   $boxes/org2box
+setenv SUMMARY   sum
+
+date
+
+setenv OUTPUT    out
+setenv PLTFILE   plt.pdb
+time $boss 211 $configurations $lambda
+rm slvzmat svopt optav optup optin AM1tmp
+exit
